@@ -7,15 +7,15 @@ PT.VR = (function () {
 
     RangeValueRule.prototype.manufacture = function() {
         var self = this;
-        var size = self.range[1] - self.range[0] + 1;
-        var random = Math.floor(Math.random() * size);
+        var size = self.range[1] - self.range[0];
+        var random = Math.floor(Math.random() * (size + 1));
         return {
             valid : function() {
                 return random + self.range[0];
             },
             invalid : function() {
                 var isGreaterThanMax = Math.floor(Math.random() * 2);
-                return isGreaterThanMax ? self.range[1] + random : self.range[0] - random;
+                return isGreaterThanMax ? self.range[1] + random + 1 : self.range[0] - random - 1;
             }
         };
     };
