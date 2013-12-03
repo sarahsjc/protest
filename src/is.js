@@ -2,11 +2,11 @@ PT = window.PT || {};
 
 PT.Is = (function (external, VR) {
     var is = {
-        rangeOf: function(range) {
-            return new VR.RangeValueRule(range);
+        rangeOf: function() {
+            return new VR.RangeValueRule(arguments);
         },
-        enumOf: function(enums) {
-            return new VR.EnumValueRule(enums);
+        enumOf: function() {
+            return new VR.EnumValueRule(arguments);
         },
         anyOf: function(klass) {
             return new VR.AnyValueRule(klass);
