@@ -1,9 +1,13 @@
 PT = window.PT || {};
 
 PT.VR = (function () {
+    function ValueRule() {}
+
     function RangeValueRule(range) {
         this.range = range;
     }
+
+    RangeValueRule.prototype = new ValueRule();
 
     RangeValueRule.prototype.manufacture = function() {
         var self = this;
@@ -24,6 +28,8 @@ PT.VR = (function () {
         this.enums = enums;
     }
 
+    EnumValueRule.prototype = new ValueRule();
+
     EnumValueRule.prototype.manufacture = function() {
         var self = this;
 
@@ -42,6 +48,8 @@ PT.VR = (function () {
         this.klass = klass;
     }
 
+    AnyValueRule.prototype = new ValueRule();
+
     AnyValueRule.prototype.manufacture = function() {
         var self = this;
 
@@ -59,6 +67,8 @@ PT.VR = (function () {
     function EqualValueRule(value) {
         this.value = value;
     }
+
+    EqualValueRule.prototype = new ValueRule();
 
     EqualValueRule.prototype.manufacture = function() {
         var self = this;
