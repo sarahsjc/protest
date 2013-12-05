@@ -1,7 +1,7 @@
 PT = window.PT || {};
 
 PT.fn = (function (external, Proto) {
-    var MAX_LOOP_SIZE = 100;
+    var MAX_LOOP_SIZE = 1000;
     var fn = {
         _for: function(protos, run) {
             for(var i=0;i<MAX_LOOP_SIZE;i++) {
@@ -9,8 +9,8 @@ PT.fn = (function (external, Proto) {
                 for(var j=0;j<protos.length;j++) {
                     instances.push(protos[j].manufacture());
                 }
+                run.apply(window, instances);
             }
-            run.apply(window, instances);
         },
         all: function() {
             var protos = arguments;
