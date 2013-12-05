@@ -1,6 +1,8 @@
 PT = window.PT || {};
 
-PT.Rule = (function (root) {
+PT.Rule = (function (external) {
+    external.Rules = external.Rules || {};
+
     function Rule(name, klass, keyFields, valueRules) {
         this.name = name;
         this.klass = klass;
@@ -23,7 +25,7 @@ PT.Rule = (function (root) {
     }
 
     Rule.parse = function(ruleName, klass) {
-        var ruleJson = root.Rules[ruleName];
+        var ruleJson = external.Rules[ruleName];
         if(ruleJson[0] != klass) {
             throw 'Should pass same class as configuration in rules when parsing rule.'
         }
