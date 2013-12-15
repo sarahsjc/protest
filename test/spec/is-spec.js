@@ -32,5 +32,13 @@ describe("Is", function () {
             expect(valueRange instanceof PT.VR.EqualValueRule).toBeTruthy();
             expect(valueRange.value).toBe('value');
         });
+
+        it("should create ListValueRule by listOf", function () {
+
+            var valueRange = PT.Is.listOf(String, 5);
+            expect(valueRange instanceof PT.VR.ListValueRule).toBeTruthy();
+            expect(valueRange.number).toBe(5);
+            expect(valueRange.clazz).toBe(String);
+        });
     });
 });

@@ -83,6 +83,60 @@ PT.VR = (function () {
         }
     };
 
+    function ListValueRule(clazz, number) {
+        this.clazz = clazz;
+        this.number = number;
+    };
+
+    ListValueRule.prototype = new ValueRule();
+
+    ListValueRule.prototype.manufacture = function() {
+        var self = this;
+        return {
+            valid: function() {
+                var target = [];
+                for (i=0;i<self.number;i++){
+                    if (self.clazz.name === "String" || self.clazz.name === "Number" || self.clazz.name === "Boolean") {
+                        target.push(Is.anyOf(self.clazz).manufacture().valid());
+                    } else if (self.clazz.name !== "Object"){
+                        target.push(Is.kindOf(self.clazz).manufacture().valid());
+                    } else {
+                        target.push(new Object());
+                    }
+
+                }
+                return target;
+            },
+            invalid: function() {
+                return genUndefined();
+            }
+        }
+    };
+
+//    function KindValueRule(clazz) {
+//        this.clazz =  clazz;
+//    }
+//
+//    KindValueRule.prototype = new ValueRule();
+//
+//    KindValueRule.prototype.manufacture = function() {
+//        var self = this;
+//
+//        return {
+//            valid: function() {
+//                var obj = new self.clazz();
+//                for(var i in obj){
+//                    obj[i] = Is.anyOf(typeof(i)).manufacture().valid();
+//                }
+//                return obj;
+//            },
+//            invalid: function() {
+//                return genUndefined();
+//            }
+//        }
+//
+//    };
+
     function genUndefined() {
         return {}['undefined'];
     }
@@ -91,6 +145,8 @@ PT.VR = (function () {
         RangeValueRule: RangeValueRule,
         EnumValueRule: EnumValueRule,
         AnyValueRule: AnyValueRule,
-        EqualValueRule: EqualValueRule
+        EqualValueRule: EqualValueRule,
+        KindValueRule: KindValueRule,
+        ListValueRule:ListValueRule
     }
 })();

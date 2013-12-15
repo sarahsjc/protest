@@ -79,5 +79,45 @@ describe("ValueRule", function () {
                 });
             });
         });
+
+        describe("should create a valid array", function() {
+            it("should create a valid String array", function () {
+                var valueRule = new PT.VR.ListValueRule(String, 5);
+                check(function() {
+                    var stringArray = valueRule.manufacture().valid();
+                    expect(stringArray instanceof Array).toBeTruthy();
+                    expect(typeof (stringArray[4])).toBe('string');
+                });
+            });
+
+            it("should create a valid Number array", function() {
+                var valueRule = new PT.VR.ListValueRule(Number, 5);
+                check(function() {
+                    var stringArray = valueRule.manufacture().valid();
+                    expect(stringArray instanceof Array).toBeTruthy();
+                    expect(typeof (stringArray[4])).toBe('number');
+                });
+            });
+
+            it("should create a valid object array", function() {
+                var valueRule = new PT.VR.ListValueRule(Object, 5);
+                check(function() {
+                    var stringArray = valueRule.manufacture().valid();
+                    expect(stringArray instanceof Array).toBeTruthy();
+                    expect(typeof (stringArray[4])).toBe('object');
+                });
+            });
+
+//            it("should create a valid specific object array", function() {
+//                var valueRule = new PT.VR.ListValueRule(Person, 5);
+//                check(function() {
+//                    var stringArray = valueRule.manufacture().valid();
+//                    expect(stringArray instanceof Array).toBeTruthy();
+//                    expect(typeof (stringArray[4])).toBe('Person');
+//                });
+//            });
+        });
+
+
     });
 });
